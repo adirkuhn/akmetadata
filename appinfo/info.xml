@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<info>
+	<id>akmetadata</id>
+	<name>AK-MetaData</name>
+	<description>Search, edit and extract metadata</description>
+	<version>1.0</version>
+	<licence>AGPL</licence>
+	<author>Adir Kuhn</author>
+	<requiremin>4</requiremin>
+</info>
