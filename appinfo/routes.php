@@ -68,6 +68,9 @@ $this->create('files_ajax_scan', 'ajax/scan.php')
 $this->create('files_ajax_upload', 'ajax/upload.php')
 	->actionInclude('files/ajax/upload.php');
 
+$this->create('files_ajax_metadata', 'ajax/metadata.php')
+	->actionInclude('files/ajax/metadata.php');
+
 $this->create('download', 'download{file}')
 	->requirements(array('file' => '.*'))
 	->actionInclude('files/download.php');

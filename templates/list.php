@@ -122,14 +122,14 @@
 <div id="metadata-form" title="Edit File Metadata" style="display: none;">
 	<form>
 		<fieldset>
-			<label for="name">Name</label>
-			<input type="text" name="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+			<label for="content-type">Content Type</label>
+			<input type="text" name="content-type" value="" class="text ui-widget-content ui-corner-all">
 			<br/>
-			<label for="email">Email</label>
-			<input type="text" name="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
+			<label for="encoding">Encoding</label>
+			<input type="text" name="encoding" value="" class="text ui-widget-content ui-corner-all">
 			<br/>
-			<label for="password">Password</label>
-			<input type="password" name="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
+			<label for="author">Author</label>
+			<input type="text" name="author" value="" class="text ui-widget-content ui-corner-all">
 
 		</fiesldset>
 	</form>

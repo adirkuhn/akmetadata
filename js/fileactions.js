@@ -479,7 +479,21 @@
 				var url = context.fileList.getDownloadUrl(filename, dir);
 
 				var saveMetada = function(data) {
-					console.log(data);
+					var params;
+					params = {
+						dir: dir,
+						file: filename
+					};
+
+					console.log(OC.filePath('files', 'ajax', 'metadata.php'));
+
+					$.post(OC.filePath('files', 'ajax', 'metadata.php'), params, function(response) {
+						console.log("metadatando");
+						console.log(response);
+						if (response.status === "success") {
+							console.log(response.data);
+						}
+					});
 				}
 
 				dialog = $( "#metadata-form" ).dialog({
@@ -488,7 +502,7 @@
 					width: 350,
 					modal: true,
 					buttons: {
-						"Create an account": saveMetada,
+						"Save": saveMetada,
 						Cancel: function() {
 							dialog.dialog("close");
 						}
