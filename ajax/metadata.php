@@ -1,35 +1,34 @@
 <?php
 
 OCP\JSON::checkLoggedIn();
+OCP\JSON::callCheck();
 
 function metadataExtract($file) {
 
     $tika = __DIR__ . "/./../tika/tika-app-1.8.jar";
     $tika = "/Users/adirkuhn/Projetos/b3/owncloud/apps/files/tika/tika-app-1.8.jar";
 
-    $output = array();
-    $cmd = "(java -jar {$tika} -j " . __DIR__ . "/out.txt)2>&1";
+    $cmd = "java -jar {$tika} -j " . $file;
     echo $cmd;
-    $ret = system($cmd, $output);
-    //$ret = system("ls -l {$tika}", $output);
+    $ret = shell_exec($cmd);
 
-    echo "<pre>";
-    print_r($ret);
-    print_r($output);
-
-    return $ret;
+    return json_decode($ret, true);
 }
 
 // Get data
-//$dir = isset($_POST['dir']) ? $_POST['dir'] : '';
-//$file = isset($_POST['file']) ? $_POST['file'] : '';
+$dir = isset($_POST['dir']) ? $_POST['dir'] : '';
+$file = isset($_POST['file']) ? $_POST['file'] : '';
 
-//$path = \OC\Files\Filesystem::getLocalPath($dir);
+$path = __DIR__ . \OC\Files\Filesystem::getLocalPath($dir) . $file;
+
+echo __DIR__ . $path;
 
 //var_dump($dir);
 //var_dump($file);
 //var_dump($path);
 
-$response = metadataExtract(1);
+$response = metadataExtract($path);
 
-OCP\JSON::success(array("data" => $response));
+//header('Content-Type: application/json');
+//echo json_encode($response);
+OCP\JSON::success(array('data' => $response));

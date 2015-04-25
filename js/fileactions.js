@@ -478,7 +478,11 @@
 				var dir = context.dir || context.fileList.getCurrentDirectory();
 				var url = context.fileList.getDownloadUrl(filename, dir);
 
-				var saveMetada = function(data) {
+				var saveMetadata = function(data) {
+					console.log('salvado');
+				}
+
+				var extractMetadata = function(data) {
 					var params;
 					params = {
 						dir: dir,
@@ -486,13 +490,19 @@
 					};
 
 					console.log(OC.filePath('files', 'ajax', 'metadata.php'));
+					console.log("bananas");
+					$.post(OC.filePath('files', 'ajax', 'metadata.php'), params).done(function(response) {
 
-					$.post(OC.filePath('files', 'ajax', 'metadata.php'), params, function(response) {
-						console.log("metadatando");
-						console.log(response);
-						if (response.status === "success") {
+						//if (response.status && response.status == 200) {
+
+							console.log('oi');
 							console.log(response.data);
-						}
+							console.log(response.data["Content-Type"]);
+							//	console.log(JSON.parse(response.responseText));
+
+							$("input[name='content-type']").val(response.data["Content-Type"]);
+							$("input[name='encoding']").val(response.data["Content-Encoding"]);
+						//}
 					});
 				}
 
@@ -502,7 +512,8 @@
 					width: 350,
 					modal: true,
 					buttons: {
-						"Save": saveMetada,
+						"Save": saveMetadata,
+						"Extract Metadata": extractMetadata,
 						Cancel: function() {
 							dialog.dialog("close");
 						}
