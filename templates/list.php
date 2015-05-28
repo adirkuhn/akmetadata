@@ -121,16 +121,5 @@
 
 <div id="metadata-form" title="Edit File Metadata" style="display: none;">
 	<form>
-		<fieldset>
-			<label for="content-type">Content Type</label>
-			<input type="text" name="content-type" value="" class="text ui-widget-content ui-corner-all">
-			<br/>
-			<label for="encoding">Encoding</label>
-			<input type="text" name="encoding" value="" class="text ui-widget-content ui-corner-all">
-			<br/>
-			<label for="author">Author</label>
-			<input type="text" name="author" value="" class="text ui-widget-content ui-corner-all">
-
-		</fiesldset>
 	</form>
 </div>

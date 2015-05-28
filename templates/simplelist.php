@@ -16,7 +16,6 @@
 	<h2><?php p($l->t('No entries found in this folder')); ?></h2>
 	<p></p>
 </div>
-<h1>oioioio</h1>
 <table id="filestable">
 	<thead>
 		<tr>

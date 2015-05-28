@@ -70,6 +70,8 @@ $this->create('files_ajax_upload', 'ajax/upload.php')
 
 $this->create('files_ajax_metadata', 'ajax/metadata.php')
 	->actionInclude('files/ajax/metadata.php');
+$this->create('files_ajax_savemetadata', 'ajax/savemetadata.php')
+->actionInclude('files/ajax/savemetadata.php');
 
 $this->create('download', 'download{file}')
 	->requirements(array('file' => '.*'))

@@ -641,3 +641,19 @@ table.dragshadow td.size {
 	filter: alpha(opacity=50);
 	opacity: .5;
 }
+
+.metadata-captalize
+{
+	text-transform: capitalize;
+	width: 40%;
+	float: left;
+	vertical-align: middle;
+	margin-top: 2%;
+}
+
+.success {
+	text-align: center;
+	margin: 10px;
+	border: 1px solid green;
+	background-color: #0ED80E;
+}

@@ -716,7 +716,6 @@
 			// filename td
 			td = $('<td class="filename"></td>');
 
-
 			// linkUrl
 			if (type === 'dir') {
 				linkUrl = this.linkTo(path + '/' + name);
@@ -735,6 +734,7 @@
 			} else {
 				td.append('<div class="thumbnail" style="background-image:url(' + icon + '); background-size: 32px;"></div>');
 			}
+
 			var linkElem = $('<a></a>').attr({
 				"class": "name",
 				"href": linkUrl

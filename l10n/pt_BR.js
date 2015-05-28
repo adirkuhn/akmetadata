@@ -106,6 +106,13 @@ OC.L10N.register(
     "Files are being scanned, please wait." : "Arquivos sendo escaneados, por favor aguarde.",
     "Currently scanning" : "Atualmente escaneando",
     "No favorites" : "Sem favoritos",
-    "Files and folders you mark as favorite will show up here" : "Arquivos e pastas que você marcou como favorito são mostrados aqui"
+    "Files and folders you mark as favorite will show up here" : "Arquivos e pastas que você marcou como favorito são mostrados aqui",
+    "title" : "título",
+    "subject" : "assunto",
+    "author" : "autor",
+    "creator" : "criador",
+    "format" : "formato",
+    "keywords" : "palavras-chaves",
+    "No details" : "Sem detalhes"
 },
 "nplurals=2; plural=(n > 1);");

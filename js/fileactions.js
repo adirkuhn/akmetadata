@@ -478,8 +478,66 @@
 				var dir = context.dir || context.fileList.getCurrentDirectory();
 				var url = context.fileList.getDownloadUrl(filename, dir);
 
+				var getMetadata = function() {
+					var params;
+					params = {
+						dir: dir,
+						file: filename
+					};
+
+					$.post(OC.filePath('files', 'ajax', 'metadata.php'), params).done(function(response) {
+						if(response.status == "success") {
+							//div metadados
+							var el = $("#metadata-form");
+							el.html('');
+
+
+							if(!$.isEmptyObject(response.data.metadata)) {
+
+								var form = $("<form></form>");
+
+								$.each(response.data.metadata, function(key, value) {
+
+									var div = $('<div></div>');
+									var label = '<div class="metadata-captalize">' + t('files', key) + '</div>';
+									var input = $('<input/>', {
+										type: 'text',
+										name: key,
+										value: value
+									});
+									var br = '<br/>';
+
+									div.append(label);
+									div.append(input);
+									div.append(br);
+
+									form.append(div);
+								});
+							} else {
+								el.append(t('files', 'No details'));
+							}
+
+							el.append(form);
+						}
+					});
+				}
+				//tenta pegar os metadados do arquivo e montar tela de infos
+				getMetadata();
+
 				var saveMetadata = function(data) {
-					console.log('salvado');
+
+					var form = $("#metadata-form form");
+
+					var params = {
+						dir: dir,
+						file: filename,
+						metadata: form.serializeArray()
+					}
+
+					$.post(OC.filePath('files', 'ajax', 'savemetadata.php'), params).done(function(response) {
+						var el = $("#metadata-form");
+						el.append($('<div class="success">Metadados salvos</div>'));
+					});
 				}
 
 				var extractMetadata = function(data) {
@@ -489,32 +547,20 @@
 						file: filename
 					};
 
-					console.log(OC.filePath('files', 'ajax', 'metadata.php'));
-					console.log("bananas");
 					$.post(OC.filePath('files', 'ajax', 'metadata.php'), params).done(function(response) {
-
-						//if (response.status && response.status == 200) {
-
-							console.log('oi');
-							console.log(response.data);
-							console.log(response.data["Content-Type"]);
-							//	console.log(JSON.parse(response.responseText));
-
-							$("input[name='content-type']").val(response.data["Content-Type"]);
-							$("input[name='encoding']").val(response.data["Content-Encoding"]);
-						//}
+						//nothing =(
 					});
 				}
 
 				dialog = $( "#metadata-form" ).dialog({
 					autoOpen: false,
-					height: 300,
+					height: 400,
 					width: 350,
 					modal: true,
 					buttons: {
 						"Save": saveMetadata,
-						"Extract Metadata": extractMetadata,
-						Cancel: function() {
+						//"Extract Metadata": extractMetadata,
+						"Cancel": function() {
 							dialog.dialog("close");
 						}
 					}

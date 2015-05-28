@@ -8,11 +8,14 @@ require __DIR__ . '/metadata/custommetadata.php';
 OCP\JSON::checkLoggedIn();
 OCP\JSON::callCheck();
 
+ini_set('display_error', 'E_ALL');
+
 // Get data
 $datadir = \OC_User::getHome(\OC_User::getUser()) . '/files';
 $userdir = '/' . \OC_User::getUser() . "/files";
 $dir = isset($_POST['dir']) ? $_POST['dir'] : '';
 $dir = \OC\Files\Filesystem::normalizePath($dir);
+$metadata = $_POST['metadata'];
 
 $userdir = $userdir . $dir;
 
@@ -25,30 +28,14 @@ $fileInfo = \OC\Files\Filesystem::getFileInfo($file);
 $app = new Application();
 $view = new View($dir);
 
-$indexedFile = searchFile($app, $fileInfo->getId());
-$indexedFileDocument = $indexedFile->getDocument();
-$indexedKeys = $indexedFileDocument->getFieldNames();
-
 $response = array();
 if (file_exists($path)) {
 
     $response['fileid'] = $fileInfo->getId();
+    if (!$response['fileid'])
+        $response['fileid'] = getFileId($view, $userdir . $file);
 
-    //if (!$response['fileid'])
-    //    $response['fileid'] = getFileId($view, $userdir . $file);
-
-    $metakeys = getCustomMetadataKeys($fileInfo->getMimetype());
-
-    $metadata = array();
-    if($indexedFile) {
-        foreach ($metakeys as $key => $value) {
-            $metadata[$value] = '';
-            if (in_array($value, $indexedKeys)) {
-                $metadata[$value] = $indexedFileDocument->getFieldUtf8Value($value);
-            }
-        }
-    }
-    $response['metadata'] = $metadata;
+    indexFile($app, $response['fileid'], $metadata);
 
     OCP\JSON::success(array('data' => $response));
 }

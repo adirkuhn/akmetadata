@@ -63,8 +63,6 @@
 
 			this.files = OCA.Files.Files;
 
-			console.log('demonho'); console.log(fileActions);
-
 			// TODO: ideally these should be in a separate class / app (the embedded "all files" app)
 			this.fileList = new OCA.Files.FileList(
 				$('#app-content-files'), {
